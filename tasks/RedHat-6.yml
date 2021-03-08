@@ -80,7 +80,7 @@
       - messagebus
       - oddjobd
 
-  - name: Test If is Joined domaine to {{ DomainName }}
+  - name: Test If is Joined domain to {{ DomainName }}
     command: wbinfo -t
     changed_when: no
     register: wbinfo_final_test
@@ -88,7 +88,7 @@
 
   - debug:
       msg: "wbinfo status is {{ wbinfo_final_test.stdout }}"
-      
+
   when: join_domain is defined and join_domain
 
 - name: Print join status if host is already joined
