@@ -1,0 +1,5 @@
+# This sets a set of groups from the Active directory which are authenticated to use sudo
+
+{% for line in set_sudoers_group_membership_list %}
+"%{{ line }}@{{ DomainName }}" ALL=(ALL) ALL
+{% endfor %}

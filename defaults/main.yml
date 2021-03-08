@@ -6,6 +6,12 @@ Join_User: Administrator
 DomainName: testdomain.lan
 Join_User_Pass: setmeinavault
 
-set_group_membership:
+set_allowed_login_group_membership: true
+set_allowed_login_group_membership_list:
   - Domain Admins
   - Domain Users
+
+
+set_sudoers_group_membership: true
+set_sudoers_group_membership_list:
+  - Domain Admins

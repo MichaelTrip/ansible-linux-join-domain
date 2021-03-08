@@ -5,4 +5,6 @@
 
 - name: Set the allowed groups that can log on with Active Directory credentials
   shell: '/usr/sbin/realm permit -g "{{ item }}"@{{ DomainName }}'
-  with_list: "{{ set_group_membership }}"
+  with_list: "{{ set_allowed_login_group_membership_list }}"
+
+...

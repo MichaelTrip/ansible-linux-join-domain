@@ -21,5 +21,11 @@
 
 
 - name: Set additional access parameters for accesing this server based on group membership
-  include_tasks: set_group_membership_access.yml
-  when: set_group_membership is defined
+  include_tasks: set_allowed_login_membership_access.yml
+  when: set_allowed_login_group_membership | bool
+
+- name: Set sudoers for domain groups when specified
+  include_tasks: set_allowed_login_membership_sudoers.yml
+  when: set_sudoers_group_membership | bool
+
+...
