@@ -6,5 +6,3 @@ join_domain: false
 Join_User: ADMDOMAIN
 DomainName: ADMDOMAIN
 Join_User_Pass: setmeinavault
-realm: LINUXLAB.LOCAL
-server: linuxlab.local

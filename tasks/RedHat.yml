@@ -29,3 +29,4 @@
         - { search: 'access_provider', replace: 'access_provider = simple'}
       notify: restart sssd
   when: ad_status.rc !=0
+
