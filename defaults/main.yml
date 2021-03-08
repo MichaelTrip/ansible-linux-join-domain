@@ -2,9 +2,6 @@
 # defaults file for CentOS7JoinDomain
 join_domain: false
 
----
-# vars file for CentOSJoinDomain
-
 
 Join_User: ADMDOMAIN
 DomainName: ADMDOMAIN
