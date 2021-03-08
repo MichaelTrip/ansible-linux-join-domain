@@ -4,18 +4,18 @@
     state: present
 
 
-# - name: Install PEXPECT With Easy_Install For CentOS 7
-#   easy_install:
-#     name: pexpect
-#   when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat") and
-#           (ansible_distribution_major_version == "7")
+- name: Install PEXPECT With Easy_Install For CentOS 7
+  easy_install:
+    name: pexpect
+  when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat") and
+          (ansible_distribution_major_version == "7")
 
-# - name: Install PEXPECT with PIP3.6 For CentOS 8
-#   pip:
-#     name: pexpect
-#     executable: pip3.6
-#   when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat") and
-#           (ansible_distribution_major_version == "8")
+- name: Install PEXPECT with PIP3.6 For CentOS 8
+  pip:
+    name: pexpect
+    executable: pip3.6
+  when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat") and
+          (ansible_distribution_major_version == "8")
 
 - name: Checking Domain Join status
   command: id "{{ Join_User }}"
