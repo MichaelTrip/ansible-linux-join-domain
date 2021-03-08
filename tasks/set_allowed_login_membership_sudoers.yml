@@ -1,8 +1,13 @@
 ---
+- name: Be sure sudo is installed
+  package:
+    name: sudo
+    state: latest
 
 - name: Deploy sudoers configuration for sudoer access based on Active Directory membership
   template:
     src: ad_groupmembers_sudo.j2
     dest: /etc/sudoers.d/ad_groupmembers_sudo
+    validate: /usr/sbin/visudo -cf %s
 
 ...
