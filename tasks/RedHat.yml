@@ -3,20 +3,6 @@
     name: "{{ package }}"
     state: present
 
-
-- name: Install PEXPECT With Easy_Install For CentOS 7
-  easy_install:
-    name: pexpect
-  when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat") and
-          (ansible_distribution_major_version == "7")
-
-- name: Install PEXPECT with PIP3.6 For CentOS 8
-  pip:
-    name: pexpect
-    executable: pip3.6
-  when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat") and
-          (ansible_distribution_major_version == "8")
-
 - name: Checking Domain Join status
   command: id "{{ Join_User }}"
   register: ad_status
@@ -25,11 +11,10 @@
 
 - name: Domain configs and Join {{ DomainName }}
   block:
-    - name: Join {{ ansible_distribution }} {{ ansible_distribution_major_version }} into Domain {{ DomainName }}
-      expect:
-        command: /bin/bash -c "/usr/sbin/realm join --user={{ Join_User }} {{ DomainName }}"
-        responses:
-          Password for *: "{{ Join_User_Pass }}"
+
+    - name: "{{ ansible_distribution }} {{ ansible_distribution_major_version }} into Domain {{ DomainName }}"
+      command: /bin/bash -c "echo {{ Join_User_Pass }} | /usr/sbin/realm join --user={{ Join_User }} {{ DomainName }}"
+      no_log: true
 
     - name: Allow user Login without FQDN
       lineinfile:
