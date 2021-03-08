@@ -1,0 +1,8 @@
+---
+
+- name: First set all group logons to deny
+  shell: "/usr/sbin/realm deny -a"
+
+- name: Set the allowed groups that can log on with Active Directory credentials
+  shell: '/usr/sbin/realm permit -g "{{ item }}"@{{ DomainName }}'
+  with_list: "{{ set_group_membership }}"

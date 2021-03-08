@@ -1,13 +1,25 @@
 ---
 # tasks file for CentOSJoinDomain
-- name: include distribution dependency variables
-  include_vars: "{{ item }}"
-  with_first_found:
-    - "{{ ansible_distribution_file_variety }}-{{ ansible_distribution_major_version }}.yml"
-    - "{{ ansible_distribution_file_variety }}.yml"
 
-- name: Linux Join Active Directory Domain Tasks
-  include_tasks: "{{ item }}"
-  with_first_found:
-    - "{{ ansible_distribution_file_variety }}-{{ ansible_distribution_major_version }}.yml"
-    - "{{ ansible_distribution_file_variety }}.yml"
+- name: Join a system to a Windows Active Directory
+  block:
+
+    - name: include distribution dependency variables
+      include_vars: "{{ item }}"
+      with_first_found:
+        - "{{ ansible_distribution_file_variety }}-{{ ansible_distribution_major_version }}.yml"
+        - "{{ ansible_distribution_file_variety }}.yml"
+
+    - name: Join Active Directory
+      include_tasks: "{{ item }}"
+      with_first_found:
+        - "{{ ansible_distribution_file_variety }}-{{ ansible_distribution_major_version }}.yml"
+        - "{{ ansible_distribution_file_variety }}.yml"
+
+
+  when: join_domain | bool
+
+
+- name: Set additional access parameters for accesing this server based on group membership
+  include_tasks: set_group_membership_access.yml
+  when: set_group_membership is defined

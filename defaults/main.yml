@@ -2,7 +2,10 @@
 # defaults file for CentOS7JoinDomain
 join_domain: false
 
-
-Join_User: ADMDOMAIN
-DomainName: ADMDOMAIN
+Join_User: Administrator
+DomainName: testdomain.lan
 Join_User_Pass: setmeinavault
+
+set_group_membership:
+  - Domain Admins
+  - Domain Users
